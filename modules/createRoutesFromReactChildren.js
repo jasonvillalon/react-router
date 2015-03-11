@@ -2,9 +2,9 @@
 var React = require('react');
 var assign = require('react/lib/Object.assign');
 var warning = require('react/lib/warning');
-var DefaultRouteType = require('./components/DefaultRoute').type;
-var NotFoundRouteType = require('./components/NotFoundRoute').type;
-var RedirectType = require('./components/Redirect').type;
+var DefaultRoute = require('./components/DefaultRoute');
+var NotFoundRoute = require('./components/NotFoundRoute');
+var Redirect = require('./components/Redirect');
 var Route = require('./Route');
 
 function checkPropTypes(componentName, propTypes, props) {
@@ -36,19 +36,21 @@ function createRouteFromReactElement(element) {
   if (!React.isValidElement(element))
     return;
 
-  var type = element.type;
+  var type = element.type
   var props = assign({}, type.defaultProps, element.props);
 
   if (type.propTypes)
     checkPropTypes(type.displayName, type.propTypes, props);
 
-  if (type === DefaultRouteType)
+  // For React 0.13 support, first check component reference
+  // Then, for React 0.12 support, check `type` property
+  if (type === DefaultRoute || type === DefaultRoute.type)
     return Route.createDefaultRoute(createRouteOptions(props));
 
-  if (type === NotFoundRouteType)
+  if (type === NotFoundRoute || type === NotFoundRoute.type)
     return Route.createNotFoundRoute(createRouteOptions(props));
 
-  if (type === RedirectType)
+  if (type === Redirect || type === Redirect.type)
     return Route.createRedirect(createRouteOptions(props));
 
   return Route.createRoute(createRouteOptions(props), function () {
