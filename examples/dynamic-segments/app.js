@@ -2,7 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var { Route, Redirect, RouteHandler, Link } = Router;
 
-var App = React.createClass({
+class App extends React.Component {
   render () {
     return (
       <div>
@@ -14,13 +14,12 @@ var App = React.createClass({
       </div>
     );
   }
-});
+}
 
-var User = React.createClass({
-  mixins: [ Router.State ],
+class User extends React.Component {
 
-  render () {
-    var { userId } = this.getParams();
+  render() {
+    var { userId } = this.props.params
     return (
       <div className="User">
         <h1>User id: {userId}</h1>
@@ -32,13 +31,11 @@ var User = React.createClass({
       </div>
     );
   }
-});
+}
 
-var Task = React.createClass({
-  mixins: [ Router.State ],
-
+class Task extends React.Component {
   render () {
-    var { userId, taskId } = this.getParams();
+    var { userId, taskId } = this.props.params
     return (
       <div className="Task">
         <h2>User id: {userId}</h2>
@@ -46,7 +43,7 @@ var Task = React.createClass({
       </div>
     );
   }
-});
+}
 
 var routes = (
   <Route path="/" handler={App}>

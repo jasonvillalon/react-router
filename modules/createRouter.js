@@ -542,11 +542,13 @@ function createRouter(options) {
     },
 
     render: function () {
+      let { params, query } = this.state
+
       var traverse = handlers => {
         var head = handlers[0];
         var tail = handlers.slice(1);
 
-        let element = React.createElement(head.handler, this.props);
+        let element = React.createElement(head.handler, { params, query });
 
         if (tail.length === 0) {
           return element;
