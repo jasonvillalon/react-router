@@ -543,19 +543,19 @@ function createRouter(options) {
 
     render: function () {
       var traverse = handlers => {
-        var head = handlers[0]
-        var tail = handlers.slice(1)
+        var head = handlers[0];
+        var tail = handlers.slice(1);
 
-        let element = React.createElement(head.handler, this.props)
+        let element = React.createElement(head.handler, this.props);
 
-        if (tail.length === 0){
-          return element
+        if (tail.length === 0) {
+          return element;
         } else {
-          return React.cloneElement(element, this.props, traverse(tail))
+          return React.cloneElement(element, this.props, traverse(tail));
         }
       }
 
-      return traverse(state.routes)
+      return traverse(state.routes);
     }
 
   });
