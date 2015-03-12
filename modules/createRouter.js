@@ -542,7 +542,7 @@ function createRouter(options) {
     },
 
     render: function () {
-      var { params, routes, query } = this.state
+      var { params, routes, query } = this.state;
 
       var traverse = (handlers, depth=0) => {
         if (!handlers.length) return null;
@@ -552,7 +552,7 @@ function createRouter(options) {
           query,
           ref: handler => Router.setRouteComponentAtDepth(depth, handler)
         }, traverse(handlers.slice(1), depth + 1));
-      }
+      };
 
       return traverse(routes);
     }
