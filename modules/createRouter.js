@@ -542,22 +542,19 @@ function createRouter(options) {
     },
 
     render: function () {
-      var { params, query } = this.state
+      var { params, routes, query } = this.state
 
-      var traverse = handlers => {
-        var head = handlers[0];
-        var tail = handlers.slice(1);
+      var traverse = (handlers, depth=0) => {
+        if (!handlers.length) return null;
 
-        let element = React.createElement(head.handler, { params, query });
-
-        if (tail.length === 0) {
-          return element;
-        } else {
-          return React.cloneElement(element, this.props, traverse(tail));
-        }
+        return React.createElement(handlers[0].handler, {
+          params,
+          query,
+          ref: handler => Router.setRouteComponentAtDepth(depth, handler)
+        }, traverse(handlers.slice(1), depth + 1));
       }
 
-      return traverse(state.routes);
+      return traverse(routes);
     }
 
   });

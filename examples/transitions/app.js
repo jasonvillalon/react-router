@@ -2,7 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
-var App = React.createClass({
+ var App = React.createClass({
   render: function () {
     return (
       <div>
@@ -10,7 +10,7 @@ var App = React.createClass({
           <li><Link to="dashboard">Dashboard</Link></li>
           <li><Link to="form">Form</Link></li>
         </ul>
-        <RouteHandler/>
+        { this.props.children }
       </div>
     );
   }
