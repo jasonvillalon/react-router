@@ -10,7 +10,7 @@ var App = React.createClass({
           <li><Link to="user" params={{userId: "123"}}>Bob</Link></li>
           <li><Link to="user" params={{userId: "abc"}}>Sally</Link></li>
         </ul>
-        <RouteHandler/>
+        { this.props.children }
       </div>
     );
   }
@@ -28,12 +28,11 @@ var User = React.createClass({
           <li><Link to="task" params={{userId: userId, taskId: "foo"}}>foo task</Link></li>
           <li><Link to="task" params={{userId: userId, taskId: "bar"}}>bar task</Link></li>
         </ul>
-        <RouteHandler/>
+        { this.props.children }
       </div>
     );
   }
 });
-
 
 var Task = React.createClass({
   mixins: [ Router.State ],

@@ -542,8 +542,20 @@ function createRouter(options) {
     },
 
     render: function () {
-      var route = Router.getRouteAtDepth(0);
-      return route ? React.createElement(route.handler, this.props) : null;
+      var traverse = handlers => {
+        var head = handlers[0]
+        var tail = handlers.slice(1)
+
+        let element = React.createElement(head.handler, this.props)
+
+        if (tail.length === 0){
+          return element
+        } else {
+          return React.cloneElement(element, this.props, traverse(tail))
+        }
+      }
+
+      return traverse(state.routes)
     }
 
   });
