@@ -542,7 +542,7 @@ function createRouter(options) {
     },
 
     render: function () {
-      let { params, query } = this.state
+      var { params, query } = this.state
 
       var traverse = handlers => {
         var head = handlers[0];
