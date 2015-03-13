@@ -42,10 +42,7 @@ class RouteHandler extends React.Component {
   }
 
   render() {
-    // IMPORTANT: This span "soaks" up owner context, keeping
-    // React 0.13.0 from throwing a warning.
-    // TODO: Why should this even be necessary?
-    return <span>{ this.createChildRouteHandler() }</span>
+    return this.createChildRouteHandler()
   }
 
 }
