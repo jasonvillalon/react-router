@@ -304,7 +304,7 @@ function createRouter(options) {
       },
 
       handleLocationChange: function (change) {
-        this.dispatch(change.path, change.type);
+        Router.dispatch(change.path, change.type);
       },
 
       /**
